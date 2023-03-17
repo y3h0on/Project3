@@ -458,9 +458,25 @@ public class TuitionManagerController {
         }
         return false;
     }
+    private boolean errorsInRosterForScholarship(String[] info){
+        if(info[0].isBlank()){
+            textArea.appendText("first name is empty" + "\n");
+            return false;
+        }
+        if(info[1].isBlank()){
+            textArea.appendText("last name is empty" + "\n");
+            return false;
+        }
+
+        if(info[3].isBlank()){
+            textArea.appendText("Amount field is empty" + "\n");
+            return false;
+        }
+        return true;
+    }
 
     private void awardScholarship(String[] array) {
-        if(errorsInRosterForRemove(array)) {
+        if(errorsInRosterForScholarship(array)) {
             Profile profile = new Profile(array[1], array[0], array[2]);
             Student student = new Resident(profile, (com.example.project3.Major) null, 0);
             if (checkScholarship(amount.getText())) {
@@ -495,9 +511,10 @@ public class TuitionManagerController {
 
     @FXML
     void updateScholarship(ActionEvent event){
-        String[] info = new String[3];
+        String[] info = new String[4];
         info[0] = sfname.getText();
         info[1] = slname.getText();
+        info[3] = amount.getText();
         try{
             String a = sDOB.getValue().toString();
             info[2] = dateConverter(a);
@@ -648,7 +665,7 @@ public class TuitionManagerController {
                 count++;
             }}
         if(count==0){
-            textArea.appendText("no students in RBS");
+            textArea.appendText("no students in RBS" + "\n");
         }else{
         textArea.appendText("* students in " + s + "**" + "\n");
         for(int i =0; i < studentArray.getSize(); i++){
@@ -668,7 +685,7 @@ public class TuitionManagerController {
                 count++;
             }}
         if(count==0){
-            textArea.appendText("no students in SAS");
+            textArea.appendText("no students in SAS" + "\n");
         }else{
             textArea.appendText("* students in " + s + "**" + "\n");
             for(int i =0; i < studentArray.getSize(); i++){
@@ -689,7 +706,7 @@ public class TuitionManagerController {
                 count++;
             }}
         if(count==0){
-            textArea.appendText("no students in SOE");
+            textArea.appendText("no students in SOE" + "\n");
         }else{
             textArea.appendText("* students in " + s + "**" + "\n");
             for(int i =0; i < studentArray.getSize(); i++){
@@ -709,7 +726,7 @@ public class TuitionManagerController {
                 count++;
             }}
         if(count==0){
-            textArea.appendText("no students in SC&I");
+            textArea.appendText("no students in SC&I" + "\n");
         }else{
             textArea.appendText("* students in " + s + "**" + "\n");
             for(int i =0; i < studentArray.getSize(); i++){
