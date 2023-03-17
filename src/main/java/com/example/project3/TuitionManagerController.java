@@ -66,7 +66,7 @@ public class TuitionManagerController {
         this.Ct.setDisable(true);
         this.isStudyAbroad.setDisable(true);
     }
-    
+
     private boolean areCreditsValid(String s) {
         try {
             if ((Integer.parseInt(s) >= 0 && Integer.parseInt(s) <= SENIOR_UPPER_END) == true) ;
@@ -93,16 +93,16 @@ public class TuitionManagerController {
             rosterDOB.getValue().toString();
         }catch (NullPointerException e){
             if(info[1].isBlank() && info[0].isBlank() && info[3].isBlank()){
-                textArea.appendText("first name, last name, credits completed, and DOB is empty" + "\n");
+                textArea.appendText("first name, last name, credits text field, and DOB is empty" + "\n");
                 return false;}
             if(info[0].isBlank() && info[3].isBlank()){
-                textArea.appendText("first name, credits completed, and DOB is empty" + "\n");
+                textArea.appendText("first name, credits text field, and DOB is empty" + "\n");
                 return false;}
             if(info[1].isBlank() && info[3].isBlank()){
-                textArea.appendText("last name, credits completed, and DOB is empty" + "\n");
+                textArea.appendText("last name, credits text field, and DOB is empty" + "\n");
                 return false;}
             if(info[3].isBlank()) {
-                textArea.appendText("credits completed and DOB is empty" + "\n");
+                textArea.appendText("credits text field and DOB is empty" + "\n");
                 return false;}
             if(info[0].isBlank()) {
                 textArea.appendText("first name and DOB is empty" + "\n");
@@ -113,16 +113,16 @@ public class TuitionManagerController {
             textArea.appendText("DOB is empty" + "\n");
             return false;}
         if(info[0].isBlank() && info[1].isBlank() && info[3].isBlank()){
-            textArea.appendText("first name, last name, and credits completed is empty." + "\n");
+            textArea.appendText("first name, last name, and credits text field is empty." + "\n");
             return false;}
         if(info[0].isBlank() && info[3].isBlank()){
-            textArea.appendText("first name and credits completed is empty" + "\n");return false;}
+            textArea.appendText("first name and credits text field is empty" + "\n");return false;}
         if(info[1].isBlank() && info[3].isBlank()){
-            textArea.appendText("last name and credits completed is empty" + "\n");return false;}
+            textArea.appendText("last name and credits text field is empty" + "\n");return false;}
         if(info[0].isBlank() && info[1].isBlank()){textArea.appendText("first name and last name is empty" + "\n");return false;}
         if(info[0].isBlank()){textArea.appendText("first name is empty" + "\n");return false;}
         if(info[1].isBlank()){textArea.appendText("last name is empty" + "\n");return false;}
-        if(info[3].isBlank()){textArea.appendText(" credits completed is empty" + "\n");return false;}
+        if(info[3].isBlank()){textArea.appendText(" credits text field is empty" + "\n");return false;}
         return true;
     }
 
@@ -383,10 +383,80 @@ public class TuitionManagerController {
             textArea.appendText("DOB is empty" + "\n");
         }
     }
+    private boolean errorsInRosterForEnroll(String[] info){
+        try{
+            eDOB.getValue().toString();
+        }catch (NullPointerException e){
+            if(info[1].isBlank() && info[0].isBlank() && info[3].isBlank()){
+                textArea.appendText("first name, last name, credits text field, and DOB is empty" + "\n");
+                return false;}
+            if(info[0].isBlank() && info[3].isBlank()){
+                textArea.appendText("first name, credits text field, and DOB is empty" + "\n");
+                return false;}
+            if(info[1].isBlank() && info[3].isBlank()){
+                textArea.appendText("last name, credits text field, and DOB is empty" + "\n");
+                return false;}
+            if(info[3].isBlank()) {
+                textArea.appendText("credits text field and DOB is empty" + "\n");
+                return false;}
+            if(info[0].isBlank()) {
+                textArea.appendText("first name and DOB is empty" + "\n");
+                return false;}
+            if(info[1].isBlank()) {
+                textArea.appendText("last name and DOB is empty" + "\n");
+                return false;}
+            textArea.appendText("DOB is empty" + "\n");
+            return false;}
+        if(info[0].isBlank() && info[1].isBlank() && info[3].isBlank()){
+            textArea.appendText("first name, last name, and credits text field is empty." + "\n");
+            return false;}
+        if(info[0].isBlank() && info[3].isBlank()){
+            textArea.appendText("first name and credits text field is empty" + "\n");return false;}
+        if(info[1].isBlank() && info[3].isBlank()){
+            textArea.appendText("last name and credits text field is empty" + "\n");return false;}
+        if(info[0].isBlank() && info[1].isBlank()){textArea.appendText("first name and last name is empty" + "\n");return false;}
+        if(info[0].isBlank()){textArea.appendText("first name is empty" + "\n");return false;}
+        if(info[1].isBlank()){textArea.appendText("last name is empty" + "\n");return false;}
+        if(info[3].isBlank()){textArea.appendText(" credits text field is empty" + "\n");return false;}
+        return true;
+    }
 
+    private boolean errorsInRosterForDrop(String[] info){
+        try{
+            eDOB.getValue().toString();
+        }catch (NullPointerException e){
+            if(info[1].isBlank() && info[0].isBlank()){
+                textArea.appendText("first name, last name, and DOB is empty" + "\n");
+                return false;
+            }
+            if(info[0].isBlank()){
+                textArea.appendText("first name and DOB is empty" + "\n");
+                return false;
+            }
+            if(info[1].isBlank()){
+                textArea.appendText("last name and DOB is empty" + "\n");
+                return false;
+            }
+            textArea.appendText("DOB is empty" + "\n");
+            return false;
+        }
+        if(info[0].isBlank() && info[1].isBlank()){
+            textArea.appendText("first name and last name is empty.");
+            return false;
+        }
+        if(info[0].isBlank()){
+            textArea.appendText("first name is empty" + "\n");
+            return false;
+        }
+        if(info[1].isBlank()){
+            textArea.appendText("last name is empty" + "\n");
+            return false;
+        }
+        return true;
+    }
 
     private void enrollStudent(String[] array){
-        if(errorsInRoster(array)){
+        if(errorsInRosterForEnroll(array)){
             if(areCreditsValid(array[3])){
                 Profile profile = new Profile(array[1], array[0], array[2]);
                 Student student = new Resident(profile, (com.example.project3.Major) null, 0);
@@ -431,19 +501,17 @@ public class TuitionManagerController {
         String[] info = new String[4];
         info[0] = efname.getText();
         info[1] = elname.getText();
-        try {
+        info[3] = creditsEnrolled.getText();
+        if(errorsInRosterForEnroll(info)){
             String a = eDOB.getValue().toString();
             String b = dateConverter(a);
             info[2] = b;
-            info[3] = creditsEnrolled.getText();
             enrollStudent(info);
-        }catch (NullPointerException e){
-            textArea.appendText("DOB is empty" + "\n");
         }
     }
 
     private void dropStudent(String[] array){
-        if(errorsInRosterForRemove(array)){
+        if(errorsInRosterForDrop(array)){
         Profile profile = new Profile(array[1], array[0], array[2]);
         EnrollStudent student = new EnrollStudent(profile, 0);
         if(enrolledStudents.contains(student)){
@@ -459,13 +527,11 @@ public class TuitionManagerController {
         String[] info = new String[3];
         info[0] = efname.getText();
         info[1] = elname.getText();
-        try {
+        if(errorsInRosterForDrop(info)){
             String a = eDOB.getValue().toString();
             String b = dateConverter(a);
             info[2] = b;
             dropStudent(info);
-        }catch (NullPointerException e){
-            textArea.appendText("DOB is empty" + "\n");
         }
     }
     private boolean checkScholarship(String s){
@@ -485,24 +551,44 @@ public class TuitionManagerController {
         return false;
     }
     private boolean errorsInRosterForScholarship(String[] info){
-        if(info[0].isBlank()){
-            textArea.appendText("first name is empty" + "\n");
-            return false;
-        }
-        if(info[1].isBlank()){
-            textArea.appendText("last name is empty" + "\n");
-            return false;
-        }
-
-        if(info[3].isBlank()){
-            textArea.appendText("Amount field is empty" + "\n");
-            return false;
-        }
+        try{
+            sDOB.getValue().toString();
+        }catch (NullPointerException e){
+            if(info[1].isBlank() && info[0].isBlank() && info[3].isBlank()){
+                textArea.appendText("first name, last name, amount text field, and DOB is empty" + "\n");
+                return false;}
+            if(info[0].isBlank() && info[3].isBlank()){
+                textArea.appendText("first name, amount text field, and DOB is empty" + "\n");
+                return false;}
+            if(info[1].isBlank() && info[3].isBlank()){
+                textArea.appendText("last name, amount text field, and DOB is empty" + "\n");
+                return false;}
+            if(info[3].isBlank()) {
+                textArea.appendText("amount text field and DOB is empty" + "\n");
+                return false;}
+            if(info[0].isBlank()) {
+                textArea.appendText("first name and DOB is empty" + "\n");
+                return false;}
+            if(info[1].isBlank()) {
+                textArea.appendText("last name and DOB is empty" + "\n");
+                return false;}
+            textArea.appendText("DOB is empty" + "\n");
+            return false;}
+        if(info[0].isBlank() && info[1].isBlank() && info[3].isBlank()){
+            textArea.appendText("first name, last name, and amount text field is empty." + "\n");
+            return false;}
+        if(info[0].isBlank() && info[3].isBlank()){
+            textArea.appendText("first name and amount text field is empty" + "\n");return false;}
+        if(info[1].isBlank() && info[3].isBlank()){
+            textArea.appendText("last name and amount text field is empty" + "\n");return false;}
+        if(info[0].isBlank() && info[1].isBlank()){textArea.appendText("first name and last name is empty" + "\n");return false;}
+        if(info[0].isBlank()){textArea.appendText("first name is empty" + "\n");return false;}
+        if(info[1].isBlank()){textArea.appendText("last name is empty" + "\n");return false;}
+        if(info[3].isBlank()){textArea.appendText(" amount text field is empty" + "\n");return false;}
         return true;
     }
 
     private void awardScholarship(String[] array) {
-        if(errorsInRosterForScholarship(array)) {
             Profile profile = new Profile(array[1], array[0], array[2]);
             Student student = new Resident(profile, (com.example.project3.Major) null, 0);
             if (checkScholarship(amount.getText())) {
@@ -532,7 +618,6 @@ public class TuitionManagerController {
                     textArea.appendText(profile.toString() + " is not in the roster" + "\n");
                 }
             }
-        }
     }
 
     @FXML
@@ -541,14 +626,10 @@ public class TuitionManagerController {
         info[0] = sfname.getText();
         info[1] = slname.getText();
         info[3] = amount.getText();
-        try{
-            String a = sDOB.getValue().toString();
-            info[2] = dateConverter(a);
+        if(errorsInRosterForScholarship(info)){
+            info[2] = dateConverter(sDOB.getValue().toString());
             awardScholarship(info);
-        }catch (NullPointerException e){
-            textArea.appendText("DOB is empty" + "\n");
         }
-
     }
 
     private void helperForPrint() {
