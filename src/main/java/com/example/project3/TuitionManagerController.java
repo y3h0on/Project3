@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
 public class TuitionManagerController {
 
 
-    private Major m;
+    private Major m = com.example.project3.Major.EE;
     @FXML
     private RadioButton rbEE, rbITI, rbCS, rbMATH, rbBAIT;
     @FXML
@@ -66,9 +66,7 @@ public class TuitionManagerController {
         this.Ct.setDisable(true);
         this.isStudyAbroad.setDisable(true);
     }
-
-
-
+    
     private boolean areCreditsValid(String s) {
         try {
             if ((Integer.parseInt(s) >= 0 && Integer.parseInt(s) <= SENIOR_UPPER_END) == true) ;
@@ -89,19 +87,42 @@ public class TuitionManagerController {
         }
         return true;
     }
+
     private boolean errorsInRoster(String[] info){
-        if(info[0].isBlank()){
-            textArea.appendText("first name is empty" + "\n");
-            return false;
-        }
-        if(info[1].isBlank()){
-            textArea.appendText("last name is empty" + "\n");
-            return false;
-        }
-        if(info[3].isBlank()){
-            textArea.appendText("credits Completed is empty" + "\n");
-            return false;
-        }
+        try{
+            rosterDOB.getValue().toString();
+        }catch (NullPointerException e){
+            if(info[1].isBlank() && info[0].isBlank() && info[3].isBlank()){
+                textArea.appendText("first name, last name, credits completed, and DOB is empty" + "\n");
+                return false;}
+            if(info[0].isBlank() && info[3].isBlank()){
+                textArea.appendText("first name, credits completed, and DOB is empty" + "\n");
+                return false;}
+            if(info[1].isBlank() && info[3].isBlank()){
+                textArea.appendText("last name, credits completed, and DOB is empty" + "\n");
+                return false;}
+            if(info[3].isBlank()) {
+                textArea.appendText("credits completed and DOB is empty" + "\n");
+                return false;}
+            if(info[0].isBlank()) {
+                textArea.appendText("first name and DOB is empty" + "\n");
+                return false;}
+            if(info[1].isBlank()) {
+                textArea.appendText("last name and DOB is empty" + "\n");
+                return false;}
+            textArea.appendText("DOB is empty" + "\n");
+            return false;}
+        if(info[0].isBlank() && info[1].isBlank() && info[3].isBlank()){
+            textArea.appendText("first name, last name, and credits completed is empty." + "\n");
+            return false;}
+        if(info[0].isBlank() && info[3].isBlank()){
+            textArea.appendText("first name and credits completed is empty" + "\n");return false;}
+        if(info[1].isBlank() && info[3].isBlank()){
+            textArea.appendText("last name and credits completed is empty" + "\n");return false;}
+        if(info[0].isBlank() && info[1].isBlank()){textArea.appendText("first name and last name is empty" + "\n");return false;}
+        if(info[0].isBlank()){textArea.appendText("first name is empty" + "\n");return false;}
+        if(info[1].isBlank()){textArea.appendText("last name is empty" + "\n");return false;}
+        if(info[3].isBlank()){textArea.appendText(" credits completed is empty" + "\n");return false;}
         return true;
     }
 
@@ -127,7 +148,6 @@ public class TuitionManagerController {
     }
 
     private void addResidentStudent(String[] tokens) {
-        if(errorsInRoster(tokens)) {
             Date date = new Date(tokens[2]);
             if (NewIsValid(date)) {
                 if (areCreditsValid(tokens[3])) {
@@ -144,10 +164,9 @@ public class TuitionManagerController {
                     }
                 }
             }
-        }
+
     }
     private void addInternationalStudentStudyAbroad(String[] tokens){
-        if(errorsInRoster(tokens)) {
             Date date = new Date(tokens[2]);
             if (date.isValid()) {
                 if (areCreditsValid(tokens[3])) {
@@ -166,10 +185,8 @@ public class TuitionManagerController {
             } else {
                 textArea.appendText("DOB invalid: " + tokens[2] + " is not a valid calendar date" + "\n");
             }
-        }
     }
     private void addInternationalStudent(String[] tokens){
-        if(errorsInRoster(tokens)) {
             Date date = new Date(tokens[2]);
             if (date.isValid()) {
                 if (areCreditsValid(tokens[3])) {
@@ -188,11 +205,9 @@ public class TuitionManagerController {
             } else {
                 textArea.appendText("DOB invalid: " + tokens[2] + " is not a valid calendar date" + "\n");
             }
-        }
     }
 
     private void addNonResidentStudent(String[] tokens){
-        if(errorsInRoster(tokens)) {
             Date date = new Date(tokens[2]);
             if (date.isValid()) {
                 if (areCreditsValid(tokens[3])) {
@@ -211,10 +226,8 @@ public class TuitionManagerController {
             } else {
                 textArea.appendText("DOB invalid: " + tokens[3] + " is not a valid calendar date" + "\n");
             }
-        }
     }
     private void addTriStateStudent(String[] tokens, boolean b){
-        if(errorsInRoster(tokens)) {
                 if (areCreditsValid(tokens[3])) {
                         if (Integer.parseInt(tokens[3]) >= 0 && Integer.parseInt(tokens[3]) <= SENIOR_UPPER_END) {
                             if (b == true) {
@@ -241,7 +254,6 @@ public class TuitionManagerController {
                             }
 
                         }
-                }
     }
 
     private String dateConverter(String a ){
@@ -254,13 +266,10 @@ public class TuitionManagerController {
         String[] info = new String[5];
         info[0] = fname.getText();
         info[1] = lname.getText();
-        try{
-            String a = rosterDOB.getValue().toString();
-            String b = dateConverter(a);
-            info[2] = b;
             info[3] = creditsCompleted.getText();
             info[4] = m.name();
             if(errorsInRoster(info)) {
+                info[2] = dateConverter(rosterDOB.getValue().toString());
                 if (Resident.isSelected()) {
                     addResidentStudent(info);
                 } else {
@@ -286,9 +295,6 @@ public class TuitionManagerController {
                     }
                 }
             }
-        }catch (NullPointerException e){
-            textArea.appendText("DOB is empty" + "\n");
-        }
     }
     private void remove(String[] array){
         if(errorsInRosterForRemove(array)){
@@ -304,6 +310,28 @@ public class TuitionManagerController {
     }
 
     private boolean errorsInRosterForRemove(String[] info){
+        try{
+            rosterDOB.getValue().toString();
+        }catch (NullPointerException e){
+            if(info[1].isBlank() && info[0].isBlank()){
+                textArea.appendText("first name, last name, and DOB is empty" + "\n");
+                return false;
+            }
+            if(info[0].isBlank()){
+                textArea.appendText("first name and DOB is empty" + "\n");
+                return false;
+            }
+            if(info[1].isBlank()){
+                textArea.appendText("last name and DOB is empty" + "\n");
+                return false;
+            }
+            textArea.appendText("DOB is empty" + "\n");
+            return false;
+        }
+        if(info[0].isBlank() && info[1].isBlank()){
+            textArea.appendText("first name and last name is empty.");
+            return false;
+        }
         if(info[0].isBlank()){
             textArea.appendText("first name is empty" + "\n");
             return false;
@@ -319,12 +347,10 @@ public class TuitionManagerController {
         String[] info = new String[3];
         info[0] = fname.getText();
         info[1] = lname.getText();
-        try{
+        if(errorsInRosterForRemove(info)) {
             String a = rosterDOB.getValue().toString();
             info[2] = dateConverter(a);
             remove(info);
-        }catch (NullPointerException e){
-            textArea.appendText("DOB is empty" + "\n");
         }
     }
 
