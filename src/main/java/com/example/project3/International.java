@@ -27,6 +27,10 @@ public class International extends NonResident{
         super(profile, major, creditsCompleted);
         this.isStudyAbroad = false;
     }
+    public International(Profile profile, String major, int creditsCompleted){
+        super(profile, major, creditsCompleted);
+        this.isStudyAbroad = false;
+    }
 
     /**
      *
@@ -37,6 +41,10 @@ public class International extends NonResident{
      * @param isStudyAbroad to check if the student is study abroad or not
      */
     public International(Profile profile, Major major, int creditsCompleted, boolean isStudyAbroad){
+        super(profile, major, creditsCompleted);
+        this.isStudyAbroad = isStudyAbroad;
+    }
+    public International(Profile profile, String major, int creditsCompleted, boolean isStudyAbroad){
         super(profile, major, creditsCompleted);
         this.isStudyAbroad = isStudyAbroad;
     }
@@ -96,17 +104,5 @@ public class International extends NonResident{
         }
         return 0;
 
-    }
-
-    /**
-     * check student is study abroad or not
-     * @return ture if study abroad, false otherwise
-     */
-    public boolean isNormal(){
-        if(isStudyAbroad){
-            return true;
-        }else{
-            return false;
-        }
     }
 }

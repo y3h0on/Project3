@@ -1,8 +1,8 @@
 package com.example.project3;
-
 /**
+ * This class extends NonResident class and forms objects of students that are from the tristate of NY and CT
  * @author apurva desai, Yehum kim
- * This class extends NonResident class and forms objects of students that are from the tristate of NY and CT*/
+ * */
 public class TriState extends NonResident{
 
     private String state;
@@ -19,6 +19,10 @@ public class TriState extends NonResident{
      * @param state the state of the tristate student
      * */
     public TriState(Profile profile, Major major, int creditsCompleted, String state){
+        super(profile,major, creditsCompleted);
+        this.state = state;
+    }
+    public TriState(Profile profile, String major, int creditsCompleted, String state){
         super(profile,major, creditsCompleted);
         this.state = state;
     }

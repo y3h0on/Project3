@@ -3,7 +3,7 @@ package com.example.project3;
 /**
  The Student Class makes a student object which is used to store in the roster
  @author Apurva Desai, Yehun Kim
-  * */
+ * */
 public abstract class Student implements Comparable<Student>{
     private Profile profile;
     private Major major;
@@ -38,7 +38,7 @@ public abstract class Student implements Comparable<Student>{
     }
 
     public void setMajor(Major newMajor){
-        this.major = newMajor;
+         this.major = newMajor;
     }
 
     /**
@@ -84,6 +84,13 @@ public abstract class Student implements Comparable<Student>{
         this.major=major;
         this.creditCompleted=creditCompleted;
     }
+
+    public Student(Profile profile, String major, int creditCompleted){
+        this.profile=profile;
+        this.major=Major.valueOf(major);
+        this.creditCompleted=creditCompleted;
+    }
+
 
     public void setCreditCompleted(int newCredits){
         this.creditCompleted = newCredits;
@@ -156,7 +163,7 @@ public abstract class Student implements Comparable<Student>{
     public boolean isValid(int creditsEnrolled){
         if(creditsEnrolled>=MIN_CREDITS && creditsEnrolled<=MAX_CREDITS){
             return true;
-        }
+            }
         else{
             return false;
         }
@@ -164,25 +171,6 @@ public abstract class Student implements Comparable<Student>{
 
     public abstract double tuitionDue(int creditsEnrolled);
     public abstract boolean isResident();
-    /**
-     this is the testbed main() method to check compareTo of the student class
-     */
-    /*public static void main(String[] args) {
-        //test cases for the student class
-        Student student1 = new Student(new Profile("desai", "ace", "10/5/2001"), Major.CS, 89);
-        Student student2 = new Student(new Profile("desai", "ace", "10/5/2001"), Major.CS, 89);
-        Student student3 = new Student(new Profile("boulder", "john", "7/5/2001"), Major.BAIT, 50);
-        Student student4 = new Student(new Profile("doe", "jane", "4/15/2001"), Major.ITI, 62);
-        Student student5 = new Student(new Profile("doe", "jane", "9/6/2000"), Major.CS, 47);
-        Student student6 = new Student(new Profile("doe", "john", "10/6/1996"), Major.CS, 89);
-        Student student7 = new Student(new Profile("doe", "jan", "10/7/2002"), Major.CS, 89);
-        System.out.println(student1.compareTo(student2));
-        System.out.println(student2.compareTo(student3));
-        System.out.println(student3.compareTo(student2));
-        System.out.println(student4.compareTo(student5));
-        System.out.println(student5.compareTo(student4));
-        System.out.println(student6.compareTo(student7));
-        System.out.println(student7.compareTo(student6));
-    }*/
+
 
 }

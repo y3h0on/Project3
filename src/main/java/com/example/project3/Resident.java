@@ -1,12 +1,11 @@
 package com.example.project3;
 
+
 /**
+ *  * Resident extends class, extends the Students class and makes an object of a resident student
  * @author Apurva Desai, Yehun Kim
- * Resident extends class, extends the Students class and makes an object of a resident student
  */
 public class Resident extends Student{
-
-
     private int scholarship;
     private static final int PER_CREDIT_FEE = 404;
     private static final int TUITION = 12536;
@@ -23,6 +22,10 @@ public class Resident extends Student{
      * @param creditCompleted of the resident student
      */
     public Resident(Profile profile, Major major, int creditCompleted){
+        super(profile, major, creditCompleted);
+        this.scholarship=0;
+    }
+    public Resident(Profile profile, String major, int creditCompleted){
         super(profile, major, creditCompleted);
         this.scholarship=0;
     }

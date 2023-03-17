@@ -21,6 +21,9 @@ public class NonResident extends Student{
     public NonResident(Profile profile, Major major, int creditsCompleted){
         super(profile, major, creditsCompleted);
     }
+    public NonResident(Profile profile, String major, int creditsCompleted){
+        super(profile, major, creditsCompleted);
+    }
 
     /**
      * This method returns a double which is the tuition due for the student depending on the number of credits the student is enrolled for
