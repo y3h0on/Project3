@@ -11,7 +11,7 @@ public class TuitionManagerMain extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TuitionManagerMain.class.getResource("TuitionManagerView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 700, 750); //size of scene
+        Scene scene = new Scene(fxmlLoader.load(), 700, 600); //size of scene
         stage.setTitle("Project3: Tuition Manager!"); //title
         stage.setScene(scene);
         stage.show();
