@@ -1,5 +1,4 @@
 package com.example.project3;
-
 /**
  * This class makes an object of type enroll student
  * @author Yehun Kim, Apurva Desai
@@ -41,9 +40,7 @@ public class EnrollStudent {
      * setting method to set a student credit
      * @param creditsEnrolled the credits to be updated
      */
-    public void setCreditsEnrolled(int creditsEnrolled) {
-        this.creditsEnrolled = creditsEnrolled;
-    }
+
 
     /**
      * Override method to compare the enrollments based on their profile.

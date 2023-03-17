@@ -1,9 +1,11 @@
 package com.example.project3;
 
+import javafx.scene.control.TextArea;
+
 /**
- * @author Apurva Desai, Yehun Kim
 This class creates an object array which holds information for all the students
 this array based linear structure starts with an intitial capacity of 4 and grows by the capacity of 4 when full
+ @author Apurva Desai, Yehun Kim
  * */
 
 public class Roster {
@@ -235,40 +237,26 @@ public class Roster {
     /**
      This method prints the students in a specified school
      @param s the school whose students will be printed*/
-    public void printBySchool(String s){
-        System.out.println("* students in " + s + "**");
-        for(int i = 0; i < size; i ++){
-            if(roster[i].getMajor().getSchool().equalsIgnoreCase(s)){
-                System.out.println(roster[i]);
-            }
-        }
-        System.out.println("*end of roster**");
+    public Student printBySchool(int i ){
+            return roster[i];
     }
 
     /**
      This is a method which prints all the students in the roster
      */
-    public void print(){
+    public Student print(int i){
         sort(roster, size);
-        System.out.println(" * Student roster sorted by last name, first name, and DOB **");
-        for(int i =0; i < size; i++){
-            System.out.println(roster[i]);
-        }
-        System.out.println("*end of roster**");
+        return roster[i];
     }
 
 
     /**
      This is a method which prints the roster sorted by school major
      */
-    public void printBySchoolMajor(){
+    public Student printBySchoolMajor(int i){
         sortByMajor(roster, size);
-        System.out.println("* student roster sorted by school, major");
-        for(int i = 0; i < size; i ++){
-            System.out.println(roster[i]);
+        return roster[i];
         }
-        System.out.println("*end of roster**");
-    }
 
 
     /**
@@ -306,7 +294,7 @@ public class Roster {
      This method prints the roster sorted by standing
      4 arrays are defined inside which contain freshman, sophomore, juniors, and seniors
      */
-    public void printByStanding(){
+    public Student[] printByStanding(){
         Integer[] temp = new Integer[INITIAL_SIZE_ROSTER];
         helpForStanding(temp);
         Student[] freshman = new Student[temp[0]];
@@ -333,15 +321,29 @@ public class Roster {
             if(roster[i].getCreditCompleted()>=SENIORLOWEREND){
                 senior[counter4]=roster[i];
                 counter4++;}}
-        System.out.println("* Student roster sorted by Standing **");
+
+        Student[] allSorted = new Student[freshman.length+ junior.length+ senior.length+ sophomore.length];
+
+        int num=0;
         for(int i = 0; i < freshman.length;i++){
-            System.out.println(freshman[i]);}
+           allSorted[i] = freshman[i];
+           num++;
+        }
+
         for(int i = 0; i < junior.length;i++){
-            System.out.println(junior[i]);}
+            allSorted[num] = junior[i];
+            num++;
+        }
+
         for(int i = 0; i < senior.length;i++){
-            System.out.println(senior[i]);}
+            allSorted[num] = senior[i];
+            num++;
+        }
+
         for(int i = 0; i < sophomore.length;i++){
-            System.out.println(sophomore[i]);}
-        System.out.println("*end of roster**");
+            allSorted[num] = sophomore[i];
+            num++;
+        }
+        return allSorted;
     }
 }

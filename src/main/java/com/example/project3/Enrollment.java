@@ -1,5 +1,4 @@
 package com.example.project3;
-
 /**
  * Create a enrollment class to represent a container of all student in the current sesmeter
  * @author Yehun Kim , Apurva Desai
@@ -69,7 +68,7 @@ public class Enrollment {
 
     /**
      * remove student and update the array after removed the student in the Enrollment
-     * @param enrollStudent
+     * @param enrollStudent the student to be removed
      */
     //move the last one in the array to replace the deleting index position
     public void remove(EnrollStudent enrollStudent) {
@@ -84,7 +83,7 @@ public class Enrollment {
 
     /**
      * check if a enrollStudent is in the Enrollment or not
-     * @param enrollStudent
+     * @param enrollStudent the student to be checked
      * @return ture is in the Enrollment, false otherwise
      */
     public boolean contains(EnrollStudent enrollStudent) {
@@ -99,31 +98,23 @@ public class Enrollment {
     /**
      * If student list is not an empty, print the student list.
      */
-    public void print() {
-        if(size == 0){
-            System.out.println("Enrollment is empty!");
-        }else{
-            System.out.println("** Enrollment * ");
-            for (int i = 0; i < size; i++) {
-                System.out.println(enrollStudents[i].toString());
-            }
-            System.out.println("* end of Enrollment **");
-        }
+    public EnrollStudent print(int i) {
+        return enrollStudents[i];
     }
 
     // display the current enrollment list, based on their order in the array
-    public void displayCurrentEnrollment() {
+    /*public void displayCurrentEnrollment() {
         if(size == 0){
             System.out.println("Student roster is empty!");
         }else{
             System.out.println("Current enrollment list:");
             print();
         }
-    }
+    }*/
 
     /**
      * return enrollStudent's profile using getProfile()
-     * @param i
+     * @param i the index of the student to be returned in roster
      * @return enrollStudents profile
      */
     public Profile returnProfile(int i) {
@@ -132,7 +123,7 @@ public class Enrollment {
 
     /**
      * return enrollStudent's credit using getCreditsEnrolled()
-     * @param i
+     * @param i the index of the student to be returned and find credits
      * @return enrollStudents creditEnrolled
      */
     public int getCreditsEnrolled(int i){
