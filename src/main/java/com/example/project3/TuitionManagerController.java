@@ -7,7 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
+import java.io.File;
 import java.text.DecimalFormat;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 
 public class TuitionManagerController {
@@ -51,6 +54,8 @@ public class TuitionManagerController {
     @FXML
     private TextArea textArea;
     @FXML
+    private TextField loadFile;
+    @FXML
     private ToggleGroup Major, TriState, CheckResident;
     private Roster studentArray = new Roster();
     private Enrollment enrolledStudents = new Enrollment();
@@ -65,6 +70,14 @@ public class TuitionManagerController {
         this.Ny.setDisable(true);
         this.Ct.setDisable(true);
         this.isStudyAbroad.setDisable(true);
+    }
+    @FXML
+    protected void setNonResident(){
+        this.International.setDisable(false);
+        this.Tristate.setDisable(false);
+        this.Ny.setDisable(false);
+        this.Ct.setDisable(false);
+        this.isStudyAbroad.setDisable(false);
     }
 
     private boolean areCreditsValid(String s) {
@@ -260,6 +273,7 @@ public class TuitionManagerController {
         String[] date = a.split("-");
         return date[1] + "/" + date[2] + "/" + date[0];
     }
+
 
     @FXML
     void add(ActionEvent action){
@@ -842,6 +856,121 @@ public class TuitionManagerController {
                 }
             }
             textArea.appendText("*end of roster**" + "\n");}
+    }
+
+    private void addResidentStudentFromRoster(String[] tokens) {
+        if (tokens.length == 6) {
+            Date date = new Date(tokens[3]);
+            if (NewIsValid(date)) {
+                if (com.example.project3.Major.isMajorValid(tokens[4].toUpperCase())) {
+                    if (areCreditsValid(tokens[5])) {
+                        if (Integer.parseInt(tokens[5]) >= 0 && Integer.parseInt(tokens[5]) <= SENIOR_UPPER_END) {
+                            Student student = new Resident(new Profile(tokens[2], tokens[1], tokens[3]), com.example.project3.Major.valueOf(tokens[4].toUpperCase()), Integer.parseInt(tokens[5]));
+                            if (!studentArray.contains(student)) {
+                                studentArray.add(student);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private void addInternationalStudentFromRoster(String[] tokens){     //still need to take care of the isStudyAbroad
+        if(tokens.length>=6) {
+            Date date = new Date(tokens[3]);
+            if (date.isValid()) {
+                if (com.example.project3.Major.isMajorValid(tokens[4].toUpperCase())) {
+                    if (areCreditsValid(tokens[5])) {
+                        if (Integer.parseInt(tokens[5]) >= 0 && Integer.parseInt(tokens[5]) <= SENIOR_UPPER_END) {
+                            if(tokens.length==7){
+                                Student student = new International(new Profile(tokens[2], tokens[1], tokens[3]), com.example.project3.Major.valueOf(tokens[4].toUpperCase()), Integer.parseInt(tokens[5]), Boolean.parseBoolean(tokens[6]));
+                                if (!studentArray.contains(student)) {
+                                    studentArray.add(student);
+                                }
+                            }else {
+                                Student student = new International(new Profile(tokens[2], tokens[1], tokens[3]), com.example.project3.Major.valueOf(tokens[4].toUpperCase()), Integer.parseInt(tokens[5]));
+                                if (!studentArray.contains(student)) {
+                                    studentArray.add(student);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void addNonResidentStudentsFromRoster(String[] tokens){
+        if(tokens.length==6) {
+            Date date = new Date(tokens[3]);
+            if (date.isValid()) {
+                if (com.example.project3.Major.isMajorValid(tokens[4].toUpperCase())) {
+                    if (areCreditsValid(tokens[5])) {
+                        if (Integer.parseInt(tokens[5]) >= 0 && Integer.parseInt(tokens[5]) <= SENIOR_UPPER_END) {
+                            Student student = new NonResident(new Profile(tokens[2], tokens[1], tokens[3]), com.example.project3.Major.valueOf(tokens[4].toUpperCase()), Integer.parseInt(tokens[5]));
+                            if (!studentArray.contains(student)) {
+                                studentArray.add(student);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void addTriStateStudentFromRoster(String[] tokens){
+        if(tokens.length==7) {
+            Date date = new Date(tokens[3]);
+            if (date.isValid()) {
+                if (com.example.project3.Major.isMajorValid(tokens[4].toUpperCase())) {
+                    if (areCreditsValid(tokens[5])) {
+                        if(tokens[6].equalsIgnoreCase("NY") || tokens[6].equalsIgnoreCase("CT")) {
+                            if (Integer.parseInt(tokens[5]) >= 0 && Integer.parseInt(tokens[5]) <= SENIOR_UPPER_END) {
+                                Student student = new TriState(new Profile(tokens[2], tokens[1], tokens[3]), com.example.project3.Major.valueOf(tokens[4].toUpperCase()), Integer.parseInt(tokens[5]), tokens[6]);
+                                if (!studentArray.contains(student)) {
+                                    studentArray.add(student);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @FXML
+    void loadFromFile(ActionEvent event){
+        String a = loadFile.getText();
+        try{
+            File file = new File(a);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] tokens = line.split(",");
+                String status = tokens[0];
+                switch (status) {
+                    case "R":
+                        addResidentStudentFromRoster(tokens);
+                        break;
+                    case "N":
+                        addNonResidentStudentsFromRoster(tokens);
+                        break;
+                    case "T":
+                        addTriStateStudentFromRoster(tokens);
+                        break;
+                    case "I":
+                        addInternationalStudentFromRoster(tokens);
+                        break;
+                    default:
+                        textArea.appendText("Invalid student status in file." + "\n");
+                        break;
+                }
+            }
+            scanner.close();
+            textArea.appendText("Student loaded to the roster." + "\n");
+        }catch(FileNotFoundException e){
+            textArea.appendText("File not Found" + "\n");
+        }
     }
 
 
