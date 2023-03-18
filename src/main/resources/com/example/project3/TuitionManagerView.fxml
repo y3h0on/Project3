@@ -59,7 +59,7 @@
                                                     <GridPane.margin>
                                                         <Insets right="400.0" />
                                                     </GridPane.margin></TextField>
-                                                <Button mnemonicParsing="false" prefHeight="22.0" prefWidth="100.0" text="Load From File" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                <Button mnemonicParsing="false" onAction="#loadFromFile" prefHeight="22.0" prefWidth="100.0" text="Load From File" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                                     <GridPane.margin>
                                                         <Insets left="270.0" />
                                                     </GridPane.margin>
@@ -115,12 +115,12 @@
                                                             </padding>
                                                         </RadioButton>
                                                     </children></HBox>
-                                                <RadioButton fx:id="Resident" mnemonicParsing="false" selected="true" text="Resident" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                <RadioButton fx:id="Resident" mnemonicParsing="false" onAction="#setResident" selected="true" text="Resident" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="checkResident" />
                                                     </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton fx:id="NonResident" mnemonicParsing="false" text="NonResident" toggleGroup="$checkResident" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                <RadioButton fx:id="NonResident" mnemonicParsing="false" onAction="#setNonResident" text="NonResident" toggleGroup="$checkResident" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                                 <RadioButton fx:id="Tristate" mnemonicParsing="false" text="TriState" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                     <GridPane.margin>
                                                         <Insets bottom="23.0" left="100.0" />
@@ -153,14 +153,14 @@
                                                     </GridPane.margin>
                                                 </TextField>
                                                 <DatePicker fx:id="rosterDOB" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <CheckBox fx:id="isStudyAbroad" mnemonicParsing="false" text="CheckBox" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                <CheckBox fx:id="isStudyAbroad" mnemonicParsing="false" text="isStudyAbroad" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                     <GridPane.margin>
                                                         <Insets left="230.0" top="23.0" />
                                                     </GridPane.margin></CheckBox>
-                                    <TextField fx:id="loadFile" GridPane.rowIndex="7">
-                                       <GridPane.margin>
-                                          <Insets left="5.0" right="5.0" />
-                                       </GridPane.margin></TextField>
+                                                <TextField fx:id="loadFile" GridPane.rowIndex="7">
+                                                    <GridPane.margin>
+                                                        <Insets left="5.0" right="5.0" />
+                                                    </GridPane.margin></TextField>
                                             </children>
                                         </GridPane>
                                     </children></VBox>
@@ -346,8 +346,8 @@
     </center>
     <bottom>
         <TextArea fx:id="textArea" prefHeight="184.0" prefWidth="624.0" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" />
-         </BorderPane.margin></TextArea>
+            <BorderPane.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" />
+            </BorderPane.margin></TextArea>
     </bottom>
 </BorderPane>
