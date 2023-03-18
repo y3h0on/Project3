@@ -307,7 +307,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <MenuBar layoutY="-1.0" prefHeight="27.0" prefWidth="278.0" AnchorPane.leftAnchor="0.0">
+                                <MenuBar layoutY="-1.0" prefHeight="27.0" prefWidth="208.0" AnchorPane.leftAnchor="0.0">
                                     <menus>
                                         <Menu mnemonicParsing="false" text="Roster">
                                             <items>
@@ -329,11 +329,6 @@
                                                 <MenuItem mnemonicParsing="false" onAction="#printSAS" text="SAS" />
                                                 <MenuItem mnemonicParsing="false" onAction="#printSCI" text="SC&amp;I" />
                                                 <MenuItem mnemonicParsing="false" onAction="#printSOE" text="SOE" />
-                                            </items>
-                                        </Menu>
-                                        <Menu mnemonicParsing="false" text="Scholarship">
-                                            <items>
-                                                <MenuItem mnemonicParsing="false" text="Award Scholarship" />
                                             </items>
                                         </Menu>
                                     </menus>
