@@ -121,7 +121,7 @@
                                                     </toggleGroup>
                                                 </RadioButton>
                                                 <RadioButton fx:id="NonResident" mnemonicParsing="false" onAction="#setNonResident" text="NonResident" toggleGroup="$checkResident" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                                <RadioButton fx:id="Tristate" mnemonicParsing="false" text="TriState" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                <RadioButton fx:id="Tristate" mnemonicParsing="false" onAction="#setTriState" text="TriState" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                     <GridPane.margin>
                                                         <Insets bottom="23.0" left="100.0" />
                                                     </GridPane.margin>
@@ -129,7 +129,7 @@
                                                         <ToggleGroup fx:id="rbNonResident" />
                                                     </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton fx:id="International" mnemonicParsing="false" text="International" toggleGroup="$rbNonResident" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                <RadioButton fx:id="International" mnemonicParsing="false" onAction="#setInternational" text="International" toggleGroup="$rbNonResident" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                     <GridPane.margin>
                                                         <Insets left="100.0" top="23.0" />
                                                     </GridPane.margin>
@@ -307,7 +307,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <MenuBar layoutY="-1.0" prefHeight="27.0" prefWidth="208.0" AnchorPane.leftAnchor="0.0">
+                                <MenuBar layoutY="-1.0" prefHeight="27.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0">
                                     <menus>
                                         <Menu mnemonicParsing="false" text="Roster">
                                             <items>
