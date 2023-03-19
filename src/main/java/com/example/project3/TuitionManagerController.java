@@ -78,6 +78,19 @@ public class TuitionManagerController {
         this.Ct.setDisable(false);
         this.isStudyAbroad.setDisable(false);
     }
+    @FXML
+    protected void setTriState(){
+        this.isStudyAbroad.setDisable(true);
+        this.Ny.setDisable(false);
+        this.Ct.setDisable(false);
+    }
+
+    @FXML
+    protected void setInternational(){
+        this.Ny.setDisable(true);
+        this.Ct.setDisable(true);
+        this.isStudyAbroad.setDisable(false);
+    }
 
     private boolean areCreditsValid(String s) {
         try {
@@ -746,15 +759,29 @@ public class TuitionManagerController {
         printEnroll();
     }
 
+    private int updateCredits(){
+        int count = 0;
+        for(int i = 0; i < enrolledStudents.getSize(); i++) {
+            Profile profile = enrolledStudents.returnProfile(i);
+            Student student = new Resident(profile, (com.example.project3.Major) null, 0);
+            int a = enrolledStudents.getCreditsEnrolled(i) + studentArray.returnStudent(student).getCreditCompleted();
+            studentArray.returnStudent(student).setCreditCompleted(a);
+            if(a>=120){
+                count++;
+            }
+        }
+        return count;
+    }
+
     private void helpForSemesterEnd() {
         textArea.appendText("Credit completed has been updated." + "\n");
         textArea.appendText("** list of students eligible for graduation **" + "\n");
         for(int i = 0; i < enrolledStudents.getSize(); i++){
             Profile profile = enrolledStudents.returnProfile(i);
             Student student = new Resident(profile, (com.example.project3.Major) null, 0);
-            int a = enrolledStudents.getCreditsEnrolled(i) + studentArray.returnStudent(student).getCreditCompleted();
-            studentArray.returnStudent(student).setCreditCompleted(a);
-            if(a>=120){
+            /*int a = enrolledStudents.getCreditsEnrolled(i) + studentArray.returnStudent(student).getCreditCompleted();
+            studentArray.returnStudent(student).setCreditCompleted(a);*/
+            if(studentArray.returnStudent(student).getCreditCompleted()>=120){
                 if (studentArray.returnStudent(student) instanceof Resident) {
                     textArea.appendText(student.getProfile() + " credits completed: " +studentArray.returnStudent(student).getCreditCompleted()+ " (Senior) (Resident)" + "\n" );
                 } else if (studentArray.returnStudent(student) instanceof International) {
@@ -770,7 +797,13 @@ public class TuitionManagerController {
     @FXML
     void SemesterEnd(ActionEvent event){
         textArea.clear();
-        helpForSemesterEnd();
+        int a = updateCredits();
+        if(a!=0){
+            helpForSemesterEnd();
+        }else{
+            textArea.appendText("no students eligible for graduation!" + "\n");
+        }
+
     }
 
     @FXML
