@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
-
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Scanner;
@@ -62,8 +61,8 @@ public class TuitionManagerController {
 
     private static final int SENIOR_UPPER_END = 120;
 
+
     @FXML
-    // figure this out
     protected void setResident() {
         this.International.setDisable(true);
         this.Tristate.setDisable(true);
@@ -700,10 +699,9 @@ public class TuitionManagerController {
     }
 
     private void displayTuition(){
-        if(studentArray.getSize()!=0){
+        if(enrolledStudents.getSize()!=0){
             DecimalFormat df = new DecimalFormat("0.00");
             textArea.appendText("** Tuition due*" + "\n");
-            if(enrolledStudents.getSize()!=0){
                 for(int i = 0; i < enrolledStudents.getSize(); i++){
                     Profile profile = enrolledStudents.returnProfile(i);
                     Student student = new Resident(profile, (com.example.project3.Major) null, 0);
@@ -717,9 +715,7 @@ public class TuitionManagerController {
                     } else if (studentArray.returnStudent(student) instanceof NonResident) {
                         textArea.appendText(student.getProfile() + " (Non-Resident) enrolled "+ enrolledStudents.getCreditsEnrolled(i)+ " credits: tuition due: " + df.format(studentArray.returnStudent(student).tuitionDue(enrolledStudents.getCreditsEnrolled(i))) + "\n");
                     }
-                }}else{
-                textArea.appendText("Roster is empty" + "\n");
-            }
+                }
             textArea.appendText("* end of tuition due *" + "\n");
         }else{
             textArea.appendText("Student roster is empty!" + "\n");
@@ -773,6 +769,7 @@ public class TuitionManagerController {
     }
     @FXML
     void SemesterEnd(ActionEvent event){
+        textArea.clear();
         helpForSemesterEnd();
     }
 
@@ -875,7 +872,7 @@ public class TuitionManagerController {
             }
         }
     }
-    private void addInternationalStudentFromRoster(String[] tokens){     //still need to take care of the isStudyAbroad
+    private void addInternationalStudentFromRoster(String[] tokens){
         if(tokens.length>=6) {
             Date date = new Date(tokens[3]);
             if (date.isValid()) {
@@ -972,39 +969,5 @@ public class TuitionManagerController {
             textArea.appendText("File not Found" + "\n");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
